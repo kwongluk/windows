@@ -1,0 +1,7 @@
+netsh int ipv4 set dynamicport udp start=49152   num=255
+netsh int ipv4 set dynamicport tcp start=49152   num=255
+
+
+netsh int ipv4 show dynamicport udp
+netsh int ipv4 show dynamicport tcp
+
