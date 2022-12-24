@@ -1,0 +1,15 @@
+#Download the LGPO zip archive from Microsoft’s website. Unpack it locally and copy the resulting LGPO.exe file to C:\Windows\System32. Afterwards you can open an elevated Command Prompt for running the LGPO command to automate the management of local group policy.
+
+#Export Local Group Policy Settings
+#To create a backup for local policy policy settings on your local PC, run this command at Command Prompt:
+LGPO.exe /b backup_path
+
+A new folder with GPO GUID appears in the target directory. It will contain all local policy settings for this computer. You can restore this backup to your local machine at any time you need it, or import it later into another computer.
+
+Import GPO into Another PC
+To restore Local Group Policy settings from the backup, import them by running the following command:
+LGPO.exe /g backup_path
+
+Once imported, restart your computer for the local group policy settings to take effect.
+
+
