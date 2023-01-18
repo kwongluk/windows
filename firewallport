@@ -1,0 +1,12 @@
+Join Domain
+-----------
+UDP 53 — DNS traffic;
+TCP and UDP 88 — Kerberos authentication;
+UDP 123 — Windows Time Sync with DC;
+TCP 135 — Remote Procedure Call RPC Locator;
+TCP and UDP 139 — NetBIOS Session Service;
+TCP and UDP 389 (LDAP, DC Locator, Net Logon) or TCP 636 (LDAP over SSL);
+TCP 445 (SMB/CIFS, Net Logon);
+TCP 49152-65535 — RPC ports, randomly allocated high TCP ports.
+
+
