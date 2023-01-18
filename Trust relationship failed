@@ -1,0 +1,29 @@
+#Trust relationship failed
+
+Test-ComputerSecureChannel
+Test-ComputerSecureChannel -Verbose
+Reset-ComputerMachinePassword -Server lon-dc01 -Credential corp\dsmith
+Test-ComputerSecureChannel -Repair -Credential corpdsmith
+w32tm.exe /query /source
+Netdom resetpwd /Server:DomainController /UserD:Administrator /PasswordD:Password
+Netdom Verify WK_Salary12 /Domain:corp.contoso.com /UserO:dsmith /PasswordO:*
+Nltest /sc_change_pwd:corp.Contoso.com
+nltest /sc_verify:corp.contoso.com
+
+dcdiag /e /v /q
+
+DCDiag /Test:DNS /e /v /s:dc01.test.com >c:\ps\DcdiagDNStest.txt
+DCDiag /Test:DNS /e /v /s:dc01.test.com /fix
+
+repadmin /replsum
+repadmin /showutdvec
+replmon /syncall DC01
+
+w32tm /monitor
+dcdiag /test:netlogons
+
+
+nslookup
+set type=all
+_ldap._tcp.dc.msdcs.your_domain_name.com
+
