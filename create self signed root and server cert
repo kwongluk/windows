@@ -1,0 +1,14 @@
+
+$cert = New-SelfSignedCertificate -Type Custom -KeySpec Signature -NotAfter (Get-Date).AddYears(5) `
+-Subject "CN=RootCert" -KeyExportPolicy Exportable `
+-HashAlgorithm sha256 -KeyLength 2048 `
+-CertStoreLocation "cert:\CurrentUser\My" -KeyUsageProperty Sign -KeyUsage CertSign
+
+New-SelfSignedCertificate -DnsName xxx.xxx.local -HashAlgorithm sha256 -KeyLength 2048 -CertStoreLocation cert:\CurrentUser\My -NotAfter (Get-Date).AddYears(2) -Signer $cert
+dir cert:\CurrentUser\My
+$PFXPass = ConvertTo-SecureString -String "P@ssw0rd" -Force -AsPlainText
+Export-PfxCertificate -Cert cert:\CurrentUser\My\FCDA66171E0CE513AE4E1D1FA7FC40CC0151DE1E -Password $PFXPass -FilePath C:\temp\cert\MyCert.pfx
+Get-ChildItem -Path "cert:\CurrentUser\My" | Where-Object Thumbprint -eq FCDA66171E0CE513AE4E1D1FA7FC40CC0151DE1E | Select-Object *
+
+
+# Replace FCDA66171E0CE513AE4E1D1FA7FC40CC0151DE1E with actual thumb print
